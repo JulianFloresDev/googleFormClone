@@ -1,0 +1,64 @@
+.inputContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.inputWithError {
+  border-color: var(--color-red-error);
+}
+
+.label {
+  flex: 1 0 100%;
+}
+
+.input {
+  flex: 0 1 50%;
+
+  border: none;
+  outline: none;
+
+  padding-bottom: .25rem;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.25rem;
+  letter-spacing: .2px;
+  color: var(--color-black);
+
+  transition: all .2s linear;
+}
+
+.underline {
+  position: relative;
+  z-index: 5;
+
+  width: 50%;
+  height: 1px;
+  background-color: var(--color-grey-border);
+
+  transform: translateY(-1rem);
+}
+
+.underline::before {
+  content: '';
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 50%;
+  width: 0;
+
+  transition: all .2s linear;
+}
+
+
+.input:target ~ .underline::before,
+.input:focus ~ .underline::before,
+.input:focus-visible ~ .underline::before {
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: var(--color-violet-principal);
+
+}
