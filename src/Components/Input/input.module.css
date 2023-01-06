@@ -7,7 +7,7 @@
 }
 
 .inputWithError {
-  border-color: var(--color-red-error);
+  border-color: var(--color-red-error) !important;
 }
 
 .label {
@@ -86,7 +86,7 @@ input[type='checkbox'] {
   flex: 1 1 100%;
   display: flex;
 
-  padding: 1rem;
+  padding: 0 1rem;
   color: var(--color-red-error);
 }
 
