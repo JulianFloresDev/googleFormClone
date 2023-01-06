@@ -1,3 +1,4 @@
+import styles from "./layout.module.css";
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,11 +10,13 @@ import { Form, Awnser } from "Components";
 const Layout = () => {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/register" component={Form} />
-        <Route exact path="/user-awnser" component={Awnser} />
-        <Redirect to="/register" />
-      </Switch>
+      <div className={styles.fullpage}>
+        <Switch>
+          <Route exact path="/register" component={Form} />
+          <Route exact path="/user-awnser" component={Awnser} />
+          <Redirect to="/register" />
+        </Switch>
+      </div>
     </Router>
   );
 };

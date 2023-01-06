@@ -1,5 +1,6 @@
 import Form from "./Form";
-import Layout from "./Layout";
 import Awnser from "./Awnser";
+import Layout from "./Layout";
+import Input from "./Input";
 
-export { Form, Layout, Awnser };
+export { Form, Layout, Input, Awnser };
