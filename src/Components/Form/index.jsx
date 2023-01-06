@@ -1,6 +1,8 @@
 import styles from "./form.module.css";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { Schema } from "./schema";
 import { Input } from "Components";
 
 const Form = () => {
@@ -24,7 +26,15 @@ const Form = () => {
     fetchData();
   }, []);
 
-  const { handleSubmit, register, reset } = useForm();
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm({
+    node: "onBlur",
+    resolver: joiResolver(Schema),
+  });
 
   const sendData = (data) => {
     console.log({ data });
@@ -33,29 +43,30 @@ const Form = () => {
   return (
     <form className={styles.formContent} onSubmit={handleSubmit(sendData)}>
       <div>
-        <h1>Confidential contrat.</h1>
+        <h1>Contrato de confidencialidad.</h1>
         <p>
-          This Confidentiality Agreement may be used to keep under reserve
-          certain private information that one or more person/s and/or entity/s
-          decide to share with other person/s and/or entity/s for use in a
-          project or activity. This document complies with the requirements of
-          the National Civil and Commercial Code only.
+          El presente Acuerdo de Confidencialidad podrá ser utilizado para
+          mantener bajo reserva determinada información privada que una o más
+          persona/s y/o entidad/es decidan compartir con otra/s persona/s y/o
+          entidad/es para su utilización en un proyecto o actividad. Este
+          documento cumple únicamente con los requisitos del Código Civil y
+          Comercial de la Nación.
         </p>
       </div>
       {!isFetching &&
-        itemsFromData.map((input, index) => {
+        itemsFromData.map((input) => {
           if (input.type === "submit") {
             return null;
           }
           return (
             <Input
-              key={index}
               name={input.name}
               label={input.label}
               type={input.type}
               selectOptions={input.options || []}
               required={input.required || false}
               register={register}
+              error={errors[input.name]}
             />
           );
         })}
