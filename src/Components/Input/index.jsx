@@ -1,6 +1,6 @@
 import styles from "./input.module.css";
 
-const Input = ({ type, name, label, selectOptions, register, error }) => {
+const Input = ({ type, name, label, selectOptions, required, register, error }) => {
   return (
     <div
       className={`${styles.inputContainer} ${
@@ -9,7 +9,7 @@ const Input = ({ type, name, label, selectOptions, register, error }) => {
     >
       <label htmlFor={name} className={styles.label}>
         {label || "Pregunta..."}
-        <span>*</span>
+        {required && <span>*</span>}
       </label>
       {type === "select" ? (
         <select id={name} {...register(name || "")} className={styles.input}>

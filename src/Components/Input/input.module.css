@@ -16,6 +16,11 @@
   gap: .25rem;
 }
 
+.inputContainer:has(input[type='checkbox']) .label {
+  flex: 1 1 90%;
+}
+
+
 .label span {
   color: var(--color-red-error);
 }
@@ -62,6 +67,11 @@
   transition: all .2s linear;
 }
 
+input[type='checkbox'] {
+  flex-basis: 15px;
+  display: flex;
+  order: -1;
+}
 
 .input:target ~ .underline::before,
 .input:focus ~ .underline::before,
