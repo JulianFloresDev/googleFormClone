@@ -85,9 +85,17 @@ input[type='checkbox'] {
 .error {
   flex: 1 1 100%;
   display: flex;
+  align-items: center;
+  gap: .5rem;
 
   padding: 0 1rem;
   color: var(--color-red-error);
+}
+
+.errorIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .errorMessage {
