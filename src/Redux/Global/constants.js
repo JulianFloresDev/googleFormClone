@@ -1,3 +1,5 @@
+export const SET_DATA = "SET_DATA";
+
 export const IS_FETCHING_ON = "IS_FETCHING_ON";
 export const IS_FETCHING_OFF = "IS_FETCHING_OFF";
 

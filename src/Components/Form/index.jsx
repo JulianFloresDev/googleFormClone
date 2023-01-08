@@ -1,5 +1,7 @@
 import styles from "./form.module.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setData } from "Redux/Global/actions";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { Schema } from "./schema";
@@ -11,18 +13,17 @@ import {
 } from "Helpers/firebaseConfig";
 
 const Form = () => {
-  const [itemsFromData, setItems] = useState([]);
-  const [isFetching, setIsFetching] = useState(true);
+  const dispatch = useDispatch();
+  const { itemsFromData } = useSelector((store) => store.global);
 
   const fetchData = async () => {
     try {
       const request = await fetch(`${process.env.PUBLIC_URL}/db.json`);
       const response = await request.json();
 
-      setItems(response.items);
-      setIsFetching(false);
+      dispatch(setData(response.items));
     } catch (err) {
-      console.error(err);
+      console.error("Something was wrong: ", err);
       return [];
     }
   };
@@ -63,23 +64,22 @@ const Form = () => {
           Comercial de la Nación.
         </p>
       </div>
-      {!isFetching &&
-        itemsFromData.map((input) => {
-          if (input.type === "submit") {
-            return null;
-          }
-          return (
-            <Input
-              name={input.name}
-              label={input.label}
-              type={input.type}
-              selectOptions={input.options || []}
-              required={input.required || false}
-              register={register}
-              error={errors[input.name]}
-            />
-          );
-        })}
+      {itemsFromData.map((input) => {
+        if (input.type === "submit") {
+          return null;
+        }
+        return (
+          <Input
+            name={input.name}
+            label={input.label}
+            type={input.type}
+            selectOptions={input.options || []}
+            required={input.required || false}
+            register={register}
+            error={errors[input.name]}
+          />
+        );
+      })}
       <div className={styles.buttonsContainer}>
         <button name="submitBtn" type="submit">
           Enviar

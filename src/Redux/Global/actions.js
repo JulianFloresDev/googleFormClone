@@ -1,4 +1,11 @@
-import { IS_FETCHING_ON, IS_FETCHING_OFF, MANAGE_MODAL_STATE, MANAGE_MODAL_CONTENT } from "./constants";
+import { IS_FETCHING_ON, IS_FETCHING_OFF, MANAGE_MODAL_STATE, MANAGE_MODAL_CONTENT, SET_DATA } from "./constants";
+
+export const setData = (payload) => {
+  return {
+    type: SET_DATA,
+    payload
+  }
+};
 
 export const startFetching = () => {
   return {

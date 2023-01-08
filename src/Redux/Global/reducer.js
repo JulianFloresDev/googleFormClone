@@ -1,6 +1,7 @@
-import { IS_FETCHING_ON, IS_FETCHING_OFF, MANAGE_MODAL_STATE, MANAGE_MODAL_CONTENT } from "./constants";
+import { SET_DATA, IS_FETCHING_ON, IS_FETCHING_OFF, MANAGE_MODAL_STATE, MANAGE_MODAL_CONTENT } from "./constants";
 
 const INITIAL_STATE = {
+  itemsFromData: [],
   isFetching: false,
   isModalActive: false,
   modalContent: <></>
@@ -8,6 +9,11 @@ const INITIAL_STATE = {
 
 const globalReducer = (state= INITIAL_STATE, action) => {
   switch (action.type) {
+    case SET_DATA:
+      return {
+        ...state,
+        itemsFromData: [...action.payload]
+      }
     case IS_FETCHING_ON:
       return {
         ...state,
