@@ -4,12 +4,16 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { Layout } from "./Components";
 import "./Helpers/firebaseConfig";
+import { Provider } from "react-redux";
+import store from "Redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Layout />
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <Layout />
+    </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

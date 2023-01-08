@@ -5,17 +5,24 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { Form, Awnser } from "Components";
+import { useSelector } from "react-redux";
+import { Form, Awnser, Modal, Spinner } from "Components";
 
 const Layout = () => {
+  const { isFetching } = useSelector((store) => store.global);
   return (
     <Router>
       <div className={styles.fullpage}>
-        <Switch>
-          <Route exact path="/register" component={Form} />
-          <Route exact path="/user-awnser" component={Awnser} />
-          <Redirect to="/register" />
-        </Switch>
+        <Modal />
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          <Switch>
+            <Route exact path="/register" component={Form} />
+            <Route exact path="/user-awnser" component={Awnser} />
+            <Redirect to="/register" />
+          </Switch>
+        )}
       </div>
     </Router>
   );
