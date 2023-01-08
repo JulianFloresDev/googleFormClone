@@ -2,7 +2,7 @@ import Joi from "joi";
 
 export const Schema = Joi.object({
   full_name: Joi.string()
-    .regex(/(([A-Za-z])+(\s)*([A-Za-z])+)+/)
+    .regex(/^(([a-zA-Z])+\s+)+([a-zA-Z])+$/)
     .required()
     .messages({
       "string.empty": "Este campo es obligatorio.",
