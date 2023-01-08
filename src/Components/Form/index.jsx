@@ -4,6 +4,11 @@ import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { Schema } from "./schema";
 import { Input } from "Components";
+import {
+  checkEmail,
+  saveAwnser,
+  updateUserAwnser,
+} from "Helpers/firebaseConfig";
 
 const Form = () => {
   const [itemsFromData, setItems] = useState([]);
@@ -36,12 +41,17 @@ const Form = () => {
     resolver: joiResolver(Schema),
   });
 
-  const sendData = (data) => {
-    console.log({ data });
+  const saveInDB = async (data) => {
+    const users = await checkEmail();
+    if (users.some((user) => user.email === data.email)) {
+      console.log("this user has been registered, want update his data?");
+      return updateUserAwnser(data);
+    }
+    return saveAwnser(data);
   };
 
   return (
-    <form className={styles.formContent} onSubmit={handleSubmit(sendData)}>
+    <form className={styles.formContent} onSubmit={handleSubmit(saveInDB)}>
       <div>
         <h1>Contrato de confidencialidad.</h1>
         <p>
