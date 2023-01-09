@@ -1,16 +1,18 @@
 import styles from "./form.module.css";
+import modalStyles from "Components/Modal/modal.module.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setData } from "Redux/Global/actions";
+import { manageModalLoading, setData } from "Redux/Global/actions";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { Schema } from "./schema";
-import { Input } from "Components";
+import { Input, Button } from "Components";
 import {
   checkEmail,
   saveAwnser,
   updateUserAwnser,
 } from "Helpers/firebaseConfig";
+import { manageModalContent, manageModalActive } from "Redux/Global/actions";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -42,17 +44,165 @@ const Form = () => {
     resolver: joiResolver(Schema),
   });
 
+  const confirmReset = () => {
+    dispatch(
+      manageModalContent(
+        <>
+          <h2 className={modalStyles.infoTitle}>
+            Seguro que quieres borrar los datos ingresados?
+          </h2>
+          <p className={modalStyles.infoDescription}>
+            De igual manera, puedes volver a completarlos y no quedarte fuera de
+            esta super oferta !!
+          </p>
+          <div className={modalStyles.buttonsContainer}>
+            <Button
+              type="button"
+              variant="bg-transparent"
+              action={() => dispatch(manageModalActive(false))}
+            >
+              Atrás
+            </Button>
+            <Button
+              type="button"
+              variant="red-alert"
+              action={() => {
+                reset();
+                dispatch(manageModalActive(false));
+              }}
+            >
+              Borrar
+            </Button>
+          </div>
+        </>
+      )
+    );
+    dispatch(manageModalActive(true));
+  };
+
+  const confirmSendInfo = (data) => {
+    dispatch(
+      manageModalContent(
+        <>
+          <h2 className={modalStyles.infoTitle}>
+            Confirma que quiere pertenecer a nuestra newsletter?
+          </h2>
+          <p className={modalStyles.infoDescription}>
+            Podrás consultar tu información siempre que quieras en el apartado
+            de "info"
+          </p>
+          <div className={modalStyles.buttonsContainer}>
+            <Button
+              type="button"
+              variant="bg-transparent"
+              action={() => dispatch(manageModalActive(false))}
+            >
+              Atrás
+            </Button>
+            <Button
+              type="button"
+              variant="red-alert"
+              action={() => saveInDB(data)}
+            >
+              Registrarse
+            </Button>
+          </div>
+        </>
+      )
+    );
+    dispatch(manageModalActive(true));
+  };
+
   const saveInDB = async (data) => {
+    dispatch(manageModalLoading(true));
     const users = await checkEmail();
     if (users.some((user) => user.email === data.email)) {
-      console.log("this user has been registered, want update his data?");
-      return updateUserAwnser(data);
+      dispatch(manageModalLoading(false));
+      dispatch(
+        manageModalContent(
+          <>
+            <h2 className={modalStyles.infoTitle}>Email existente!</h2>
+            <p className={modalStyles.infoDescription}>
+              El email con el que pretende registrarse ya existe en nuestra base
+              de datos. Desea actualizar los datos?
+            </p>
+            <div className={modalStyles.buttonsContainer}>
+              <Button
+                type="button"
+                variant="bg-transparent"
+                action={() => dispatch(manageModalActive(false))}
+              >
+                Atrás
+              </Button>
+              <Button
+                type="button"
+                variant="red-alert"
+                action={() => {
+                  try {
+                    dispatch(manageModalLoading(true));
+                    updateUserAwnser(data);
+                    dispatch(manageModalActive(false));
+                    dispatch(manageModalLoading(false));
+                  } catch (err) {
+                    dispatch(
+                      manageModalContent(
+                        <>
+                          <h2>{err.toString()}</h2>
+                          <div className={modalStyles.buttonsContainer}>
+                            <Button
+                              type="button"
+                              variant="bg-transparent"
+                              action={() => dispatch(manageModalActive(false))}
+                            >
+                              Atrás
+                            </Button>
+                          </div>
+                        </>
+                      )
+                    );
+                  }
+                }}
+              >
+                Actualizar
+              </Button>
+            </div>
+          </>
+        )
+      );
+      dispatch(manageModalLoading(false));
+      return;
     }
-    return saveAwnser(data);
+    try {
+      dispatch(manageModalLoading(true));
+      saveAwnser(data);
+      reset();
+      dispatch(manageModalActive(false));
+      dispatch(manageModalLoading(false));
+    } catch (err) {
+      dispatch(
+        manageModalContent(
+          <>
+            <h2>{err.toString()}</h2>
+            <div className={modalStyles.buttonsContainer}>
+              <Button
+                type="button"
+                variant="bg-transparent"
+                action={() => dispatch(manageModalActive(false))}
+              >
+                Atrás
+              </Button>
+            </div>
+          </>
+        )
+      );
+    }
   };
 
   return (
-    <form className={styles.formContent} onSubmit={handleSubmit(saveInDB)}>
+    <form
+      className={styles.formContent}
+      onSubmit={handleSubmit(confirmSendInfo)}
+    >
       <div>
         <h1>Contrato de confidencialidad.</h1>
         <p>
@@ -84,7 +234,7 @@ const Form = () => {
         <button name="submitBtn" type="submit">
           Enviar
         </button>
-        <button name="resetBtn" type="button" onClick={() => reset()}>
+        <button name="resetBtn" type="button" onClick={() => confirmReset()}>
           Borrar formulario
         </button>
       </div>

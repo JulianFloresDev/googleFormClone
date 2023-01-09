@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
 
-  background-color: rgba(74, 44, 97, 0.25);
+  background-color: rgba(55, 65, 95, 0.35);
 }
 
 .modalContent {
@@ -18,11 +18,16 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  gap: 1rem;
+
+  max-width: 500px;
+  max-height: 500px;
 
   border-radius: 15px;
   padding: 1.5rem;
 
   background-color: var(--color-white);
+  box-shadow: 3px 3px 12px 1px var(--color-grey-shadow);
 }
 
 .infoContainer {
@@ -31,12 +36,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
 
 }
 
+.infoTitle {
+  font-weight: 500;
+  font-size: 1.75rem;
+  letter-spacing: .25px;
+}
+
+.infoDescription {
+  text-align: center;
+  font-weight: 400;
+  font-size: 1.25rem;
+  letter-spacing: .25px;
+}
+
 .buttonsContainer {
-  flex: 1 0 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 80%;
 }

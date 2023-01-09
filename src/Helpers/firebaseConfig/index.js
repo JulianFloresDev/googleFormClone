@@ -45,8 +45,10 @@ export const checkEmail = async () => {
 
 export const updateUserAwnser = async (data) => {
   try {
+    const awnsers = await getDocs(collection(database, "awnsers"));
+    const awnserWithSameEmail = awnsers?.docs?.find((awnser) => awnser.data().email === data.email);
     await setDoc(
-      doc(database, "awnsers", sessionStorage.getItem("userID").toString()),
+      doc(database, "awnsers", awnserWithSameEmail.id),
       { ...data },
       { merge: true }
     );
