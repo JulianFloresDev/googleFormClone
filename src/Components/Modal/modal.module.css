@@ -20,7 +20,9 @@
   flex-wrap: wrap;
   gap: 1rem;
 
+  min-width: 350px;
   max-width: 500px;
+  min-height: 250px;
   max-height: 500px;
 
   border-radius: 15px;
