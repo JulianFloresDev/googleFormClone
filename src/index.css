@@ -7,6 +7,9 @@
   list-style: none;
   text-decoration: none;
 }
+a {
+  color: var(--color-violet-principal);
+}
 
 body {
   font-family: "Chillax", Roboto, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell",

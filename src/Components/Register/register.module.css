@@ -6,6 +6,7 @@
   gap: var(--container-gap);
   position: relative;
 
+  margin: 3.5rem auto;
   max-width: 75%;
   border-radius: 22px;
   overflow: hidden;
@@ -17,7 +18,7 @@
 .userAwnser,
 .formContainer,
 .imgContainer {
-  flex: 1 1 50%;
+  flex: 1 1 100%;
   max-height: 600px;
   overflow: hidden;
 }
@@ -112,6 +113,35 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-
   gap: 1.5rem;
+
+  max-width: 80%;
+  padding: var(--container-gap);
+
+  border-radius: 16px;
+  border: 1px solid var(--color-grey-letter);
+  background-color: #14af844d;
+  backdrop-filter: blur(20px);
+
+  font-family: "Chillax", Roboto, sans-serif;
+  font-size: 1.25rem;
+}
+
+.awnserContainer div {
+  flex: 1 1 100%;
+  align-items: center;
+}
+
+@media screen and (max-width: 1023px) {
+  .container {
+    flex-wrap: wrap;
+  }
+
+  .imgWithAwnser {
+    transform: translateY(calc(100% - var(--container-gap)));
+  }
+
+  .userAwnser {
+    width: 100%;
+  }
 }
