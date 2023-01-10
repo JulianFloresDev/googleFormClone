@@ -1,9 +1,19 @@
 import Layout from "./Layout";
-import Modal from "./Modal";
+import Register from "./Register";
 import Awnser from "./Awnser";
-import Form from "./Form";
-import Input from "./Input";
 import Spinner from "./Spinner";
+import Modal from "./Modal";
+import Input from "./Input";
 import Button from "./Button";
+import Form from "./Form";
 
-export { Form, Modal, Layout, Input, Awnser, Spinner, Button };
+export {
+  Layout,
+  Register,
+  Awnser,
+  Spinner,
+  Modal,
+  Input,
+  Button,
+  Form
+};

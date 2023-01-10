@@ -1,9 +1,12 @@
 .inputContainer {
+  flex: 1 0 100%;
+
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
+  gap: .25rem;
 
+  font-family: 'Chillax';
 }
 
 .inputWithError {
@@ -14,12 +17,15 @@
   flex: 1 1 100%;
   display: flex;
   gap: .25rem;
+  font-size: 1rem;
+  font-weight: 700;
+
+  cursor: pointer;
 }
 
 .inputContainer:has(input[type='checkbox']) .label {
   flex: 1 1 90%;
 }
-
 
 .label span {
   color: var(--color-red-error);
@@ -49,7 +55,7 @@
   height: 1px;
   background-color: var(--color-grey-border);
 
-  transform: translateY(-1rem);
+  transform: translateY(-.25rem);
 }
 
 .borderWithError {
@@ -73,13 +79,13 @@ input[type='checkbox'] {
   order: -1;
 }
 
-.input:target ~ .underline::before,
-.input:focus ~ .underline::before,
-.input:focus-visible ~ .underline::before {
+.input:target~.underline::before,
+.input:focus~.underline::before,
+.input:focus-visible~.underline::before {
   left: 0;
   height: 3px;
   width: 100%;
-  background-color: var(--color-violet-principal);
+  background-color: var(--color-green-light);
 }
 
 .error {
@@ -89,7 +95,7 @@ input[type='checkbox'] {
   gap: .5rem;
 
   padding: 0 1rem;
-  color: var(--color-red-error);
+  color: var(--red-alert);
 }
 
 .errorIcon {

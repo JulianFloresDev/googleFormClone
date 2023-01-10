@@ -6,7 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Form, Awnser, Modal, Spinner } from "Components";
+import { Awnser, Modal, Spinner, Register } from "Components";
 
 const Layout = () => {
   const { isFetching } = useSelector((store) => store.global);
@@ -18,7 +18,7 @@ const Layout = () => {
           <Spinner />
         ) : (
           <Switch>
-            <Route exact path="/register" component={Form} />
+            <Route exact path="/register" component={Register} />
             <Route exact path="/user-awnser" component={Awnser} />
             <Redirect to="/register" />
           </Switch>

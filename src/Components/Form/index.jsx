@@ -101,7 +101,7 @@ const Form = () => {
             </Button>
             <Button
               type="button"
-              variant="red-alert"
+              variant="green-principal"
               action={() => saveInDB(data)}
             >
               Registrarse
@@ -136,7 +136,7 @@ const Form = () => {
               </Button>
               <Button
                 type="button"
-                variant="red-alert"
+                variant="green-principal"
                 action={() => {
                   try {
                     dispatch(manageModalLoading(true));
@@ -203,17 +203,7 @@ const Form = () => {
       className={styles.formContent}
       onSubmit={handleSubmit(confirmSendInfo)}
     >
-      <div>
-        <h1>Contrato de confidencialidad.</h1>
-        <p>
-          El presente Acuerdo de Confidencialidad podrá ser utilizado para
-          mantener bajo reserva determinada información privada que una o más
-          persona/s y/o entidad/es decidan compartir con otra/s persona/s y/o
-          entidad/es para su utilización en un proyecto o actividad. Este
-          documento cumple únicamente con los requisitos del Código Civil y
-          Comercial de la Nación.
-        </p>
-      </div>
+    <h2 className={styles.formTitle}>Regístrate</h2>
       {itemsFromData.map((input) => {
         if (input.type === "submit") {
           return null;
@@ -231,53 +221,9 @@ const Form = () => {
         );
       })}
       <div className={styles.buttonsContainer}>
-        <button name="submitBtn" type="submit">
-          Enviar
-        </button>
-        <button name="resetBtn" type="button" onClick={() => confirmReset()}>
-          Borrar formulario
-        </button>
+        <Button type="submit" variant="green-principal">Enviar</Button>
+        <Button type="button" action={() => confirmReset()} variant="bg-transparent">Borrar formulario</Button>
       </div>
-      <p>Nunca envíes contraseñas a través de Formularios de Google.</p>
-      <div className={styles.privPolicity}>
-        Este contenido no ha sido creado ni aprobado por Google.{" "}
-        <a
-          target="_blank"
-          href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSf0V_fueitHVvb60CYF4cCC_eB_GZ2JlpMDEMVjR-PyWFyoWA/reportabuse?source=https://docs.google.com/forms/d/e/1FAIpQLSf0V_fueitHVvb60CYF4cCC_eB_GZ2JlpMDEMVjR-PyWFyoWA/viewform"
-          rel="noreferrer"
-        >
-          Notificar uso inadecuado
-        </a>{" "}
-        -{" "}
-        <a
-          target="_blank"
-          href="https://policies.google.com/terms"
-          rel="noreferrer"
-        >
-          Términos del Servicio
-        </a>{" "}
-        -{" "}
-        <a
-          target="_blank"
-          href="https://policies.google.com/privacy"
-          rel="noreferrer"
-        >
-          Política de Privacidad
-        </a>
-      </div>
-      <span>
-        <a
-          href="https://www.google.com/forms/about/?utm_source=product&utm_medium=forms_logo&utm_campaign=forms"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_dark_clr_74x24px.svg"
-            alt="Google"
-          />
-          <span>Formularios</span>
-        </a>
-      </span>
     </form>
   );
 };
