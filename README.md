@@ -16,6 +16,5 @@
 
 ## Social Links of My Profile:
 
-  |--|--|--|
   |[LinkedIn](https://www.linkedin.com/in/julian-flores-dev/)|[Mail](mailto:julianfloresdev@gmail.com)|[Contact](https://wa.me/+5493412824516)|
   |--|--|--|
