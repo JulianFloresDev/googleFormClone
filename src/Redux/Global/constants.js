@@ -1,4 +1,6 @@
 export const SET_DATA = "SET_DATA";
+export const SET_AWNSER = "SET_AWNSER";
+export const SET_USER_AWNSER = "SET_USER_AWNSER";
 
 export const IS_FETCHING_ON = "IS_FETCHING_ON";
 export const IS_FETCHING_OFF = "IS_FETCHING_OFF";

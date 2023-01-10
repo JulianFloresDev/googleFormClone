@@ -2,7 +2,7 @@ import styles from "./form.module.css";
 import modalStyles from "Components/Modal/modal.module.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { manageModalLoading, setData } from "Redux/Global/actions";
+import { manageModalLoading, setAwnser, setData } from "Redux/Global/actions";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { Schema } from "./schema";
@@ -12,7 +12,11 @@ import {
   saveAwnser,
   updateUserAwnser,
 } from "Helpers/firebaseConfig";
-import { manageModalContent, manageModalActive } from "Redux/Global/actions";
+import {
+  manageModalContent,
+  manageModalActive,
+  setUserAwnser,
+} from "Redux/Global/actions";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -141,6 +145,8 @@ const Form = () => {
                   try {
                     dispatch(manageModalLoading(true));
                     updateUserAwnser(data);
+                    dispatch(setUserAwnser(data));
+                    dispatch(setAwnser(true));
                     dispatch(manageModalActive(false));
                     dispatch(manageModalLoading(false));
                   } catch (err) {
@@ -175,6 +181,8 @@ const Form = () => {
     try {
       dispatch(manageModalLoading(true));
       saveAwnser(data);
+      dispatch(setUserAwnser(data));
+      dispatch(setAwnser(true));
       reset();
       dispatch(manageModalActive(false));
       dispatch(manageModalLoading(false));
@@ -203,7 +211,7 @@ const Form = () => {
       className={styles.formContent}
       onSubmit={handleSubmit(confirmSendInfo)}
     >
-    <h2 className={styles.formTitle}>Regístrate</h2>
+      <h2 className={styles.formTitle}>Regístrate</h2>
       {itemsFromData.map((input) => {
         if (input.type === "submit") {
           return null;
@@ -221,8 +229,16 @@ const Form = () => {
         );
       })}
       <div className={styles.buttonsContainer}>
-        <Button type="submit" variant="green-principal">Enviar</Button>
-        <Button type="button" action={() => confirmReset()} variant="bg-transparent">Borrar formulario</Button>
+        <Button type="submit" variant="green-principal">
+          Enviar
+        </Button>
+        <Button
+          type="button"
+          action={() => confirmReset()}
+          variant="bg-transparent"
+        >
+          Borrar formulario
+        </Button>
       </div>
     </form>
   );

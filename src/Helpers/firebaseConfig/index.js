@@ -18,8 +18,8 @@ const firebaseConfig = {
   databaseURL: process.env.REACT_APP_DATABASE_URL,
 };
 
-const app = initializeApp(firebaseConfig);
-const database = getFirestore(app);
+export const app = initializeApp(firebaseConfig);
+export const database = getFirestore(app);
 initializeApp(firebaseConfig);
 
 export const saveAwnser = async (data) => {
@@ -47,6 +47,7 @@ export const updateUserAwnser = async (data) => {
   try {
     const awnsers = await getDocs(collection(database, "awnsers"));
     const awnserWithSameEmail = awnsers?.docs?.find((awnser) => awnser.data().email === data.email);
+    sessionStorage.setItem("userID", awnserWithSameEmail.id.toString());
     await setDoc(
       doc(database, "awnsers", awnserWithSameEmail.id),
       { ...data },

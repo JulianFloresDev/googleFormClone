@@ -5,6 +5,8 @@ import {
   MANAGE_MODAL_STATE,
   MANAGE_MODAL_CONTENT,
   MANAGE_MODAL_LOADING,
+  SET_AWNSER,
+  SET_USER_AWNSER
 } from "./constants";
 
 const INITIAL_STATE = {
@@ -13,6 +15,8 @@ const INITIAL_STATE = {
   isModalActive: false,
   modalContent: <></>,
   isModalLoading: false,
+  hasAwnser: false,
+  userAwnser: {}
 };
 
 const globalReducer = (state = INITIAL_STATE, action) => {
@@ -47,6 +51,16 @@ const globalReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         modalContent: action.payload,
+      };
+    case SET_AWNSER:
+      return {
+        ...state,
+        hasAwnser: action.payload,
+      };
+    case SET_USER_AWNSER:
+      return {
+        ...state,
+        userAwnser: action.payload,
       };
     default:
       return state;

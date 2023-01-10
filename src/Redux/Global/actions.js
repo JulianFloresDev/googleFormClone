@@ -5,11 +5,27 @@ import {
   MANAGE_MODAL_CONTENT,
   MANAGE_MODAL_LOADING,
   SET_DATA,
+  SET_AWNSER,
+  SET_USER_AWNSER
 } from "./constants";
 
 export const setData = (payload) => {
   return {
     type: SET_DATA,
+    payload,
+  };
+};
+
+export const setAwnser = (payload) => {
+  return {
+    type: SET_AWNSER,
+    payload,
+  };
+};
+
+export const setUserAwnser = (payload) => {
+  return {
+    type: SET_USER_AWNSER,
     payload,
   };
 };
